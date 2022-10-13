@@ -3,26 +3,47 @@ from geopy.geocoders import Nominatim
 import requests
 import pandas as pd
 
+def CityNotFoundError():
+  print("Latitude and Longitude for this city does not exist")
+
+def search_for_tonight(forecast):
+    return [element for element in forecast if element['name'] == 'Tonight']
+
 def get_forecast( city='Pittsburgh' ):
     '''
     Returns the nightly's forecast for a given city.
-
     Inputs:
     city (string): A valid string
-
     Output:
     period (dictionary/JSON): a dictionary containing at least, the forecast keys startTime, endTime and detailedForecast.
-
     Throws:
     CityNotFoundError if geopy returns empty list or if the latitude longitude fields are empty.
-
     ForecastUnavailable if the period is empty or the API throws any status code that is not 200
-
     Hint:
     * Return the period that is labeled as "Tonight"
     '''
+    geolocator = Nominatim(user_agent='Prashu')
+    location = geolocator.geocode(city)
+    if location==None:
+      return CityNotFoundError()
+    latitude = location.latitude
+    longitude = location.longitude
+    URL = f'https://api.weather.gov/points/{latitude},{longitude}'
+    response = requests.get(URL)
+    response_json = response.json()
 
+    ll_url = response_json['id']
+    ll_response_json = requests.get(ll_url).json()
+
+    forecast_url = ll_response_json['properties']['forecast']
+    forecast_response_json = requests.get(forecast_url).json()
+
+    forecast = forecast_response_json['properties']['periods']
+    forecast_tonight = search_for_tonight(forecast)
+
+    return forecast_tonight[0]['startTime'], forecast_tonight[0]['endTime'], forecast_tonight[0]['detailedForecast']
     raise NotImplementedError()
+    
 
 def main():
     period = get_forecast()

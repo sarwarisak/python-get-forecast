@@ -3,11 +3,6 @@ from geopy.geocoders import Nominatim
 import requests
 import pandas as pd
 
-def CityNotFoundError():
-  print("Latitude and Longitude for this city does not exist")
-
-def search_for_tonight(forecast):
-    return [element for element in forecast if element['name'] == 'Tonight']
 
 def get_forecast( city='Pittsburgh' ):
     '''
@@ -22,26 +17,7 @@ def get_forecast( city='Pittsburgh' ):
     Hint:
     * Return the period that is labeled as "Tonight"
     '''
-    geolocator = Nominatim(user_agent='Prashu')
-    location = geolocator.geocode(city)
-    if location==None:
-      return CityNotFoundError()
-    latitude = location.latitude
-    longitude = location.longitude
-    URL = f'https://api.weather.gov/points/{latitude},{longitude}'
-    response = requests.get(URL)
-    response_json = response.json()
 
-    ll_url = response_json['id']
-    ll_response_json = requests.get(ll_url).json()
-
-    forecast_url = ll_response_json['properties']['forecast']
-    forecast_response_json = requests.get(forecast_url).json()
-
-    forecast = forecast_response_json['properties']['periods']
-    forecast_tonight = search_for_tonight(forecast)
-
-    return forecast_tonight[0]['startTime'], forecast_tonight[0]['endTime'], forecast_tonight[0]['detailedForecast']
     raise NotImplementedError()
     
 

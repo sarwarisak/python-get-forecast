@@ -29,7 +29,7 @@ def get_forecast(city='Pittsburgh'):
         return
 
     url = f'https://api.weather.gov/points/{lats},{longs}'
-    response = requests.get(ur;)
+    response = requests.get(url)
     if (response.status_code != 200):
         raise ForecastUnavailable("Status code unsuccessful.")
         return

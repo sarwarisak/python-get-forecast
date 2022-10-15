@@ -21,7 +21,7 @@ def get_forecast(city='Pittsburgh'):
         raise CityNotFoundError("Latitude and Longitude unavailable.")
         return
     
-    lats = location.latitude
+    lats = location.latitude 
     longs = location.longitude
 
     if (lats is None) or (longs is None):

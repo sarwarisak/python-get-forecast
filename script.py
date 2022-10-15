@@ -14,36 +14,30 @@ class ForecastUnavailable(Exception):
         super()._init_(msg)
 
 
-def get_forecast(city='Pittsburgh'):
-    geolocator = Nominatim(user_agent="ssarwari")
+def get_forecast(city = 'Pittsburgh'):
+    geolocator = Nominatim(user_agent = "ssarwari")
     location = geolocator.geocode(city)
-    if location==None:
+    if location is None:
         raise CityNotFoundError("Latitude and Longitude unavailable.")
         return
-    
-    lats = location.latitude 
+    lats = location.latitude
     longs = location.longitude
-
     if (lats is None) or (longs is None):
         raise CityNotFoundError("Latitude and Longitude unavailable.")
         return
-
     url = f'https://api.weather.gov/points/{lats},{longs}'
     response = requests.get(url)
     if (response.status_code != 200):
         raise ForecastUnavailable("Status code unsuccessful.")
         return
-
     url2 = response.json()['properties']['forecast']
     response2 = requests.get(url2)
     info = response2.json()['properties']['periods']
-
     for i in range(len(info)):
         if (info[i]["name"] == "Tonight"):
             start_time = info[i]['startTime']
             end_time = info[i]['endTime']
             detailed_forecast = info[i]['detailedForecast']
-
     period = {"startTime": start_time,
               "endTime": end_time,
               "detailedForecast": detailed_forecast}

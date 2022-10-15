@@ -3,4 +3,3 @@ geopy
 requests
 tabulate
 pycodestyle
-os

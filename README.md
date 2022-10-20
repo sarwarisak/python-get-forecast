@@ -9,6 +9,7 @@
 |  2 | 2022-10-16T20:00:00-04:00 | 2022-10-17T06:00:00-04:00 | A slight chance of rain showers between 4am and 5am. Mostly cloudy, with a low around 45. Southwest wind around 5 mph. Chance of precipitation is 20%.                              |
 |  3 | 2022-10-17T20:00:00-04:00 | 2022-10-18T06:00:00-04:00 | A slight chance of rain and snow showers after 5am. Partly cloudy, with a low around 35. Southwest wind around 9 mph, with gusts as high as 23 mph. Chance of precipitation is 20%. |
 |  4 | 2022-10-18T21:00:00-04:00 | 2022-10-19T06:00:00-04:00 | Rain showers. Cloudy, with a low around 36. Southwest wind around 10 mph, with gusts as high as 23 mph. Chance of precipitation is 80%.                                             |
+|  5 | 2022-10-19T20:00:00-04:00 | 2022-10-20T06:00:00-04:00 | Widespread frost after 2am. Partly cloudy, with a low around 34. Southwest wind 7 to 12 mph, with gusts as high as 23 mph.                                                          |
 
 ---
 Copyright © 2022 Pittsburgh Supercomputing Center. All Rights Reserved.
